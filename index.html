@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lista de Videos Modal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .folder-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .folder {
+            cursor: pointer;
+            text-align: center;
+            margin: 10px;
+            width: calc(33.33% - 20px);
+            position: relative;
+            color: #FFFFFF;
+        }
+
+        .folder img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .folder:hover img {
+            transform: scale(1.05);
+        }
+
+        .modal, .inner-modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: #0, 0, 0, 0;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .modal-content img {
+            width: 50%;
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #ffffff;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+
+        .modal-info {
+            font-size: 15px;
+            color: #FFFFFF;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .modal-info h3 {
+            color: #ffcc00;
+            font-size: 22px;
+            white-space: nowrap;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .modal-info p {
+            margin: 8px 0;
+        }
+
+        .icono {
+            color: #FFFFFF;
+            margin-right: 8px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            color: #FFFFFF;
+            background-color: #FF0000;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+            display: inline-block;
+            white-space: nowrap;
+            width: auto;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: #FF0000;
+        }
+
+        .video-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- CARPETAS -->
+
+<div class="folder-container">
+<!-- Dorama #1 -->
+<div class="folder" onclick="openModal('modalD1')">
+<img src="https://image.tmdb.org/t/p/original/ecM5MY9g2mF6x5SrB2QWOYkcH98.jpg" alt="EL JUEGO DE LA MUERTE">
+</div>
+<!-- Dorama #2 -->
+<div class="folder" onclick="openModal('modalD2')">
+<img src="https://image.tmdb.org/t/p/original/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg" alt="EL JUEGO DEL CALAMAR">    
+</div>
+<!-- Dorama #3 -->
+<div class="folder" onclick="openModal('modalD3')">
+<img src="https://image.tmdb.org/t/p/original/uMl2TzRs1LzTR9jyRNHnf5keqMV.jpg" alt="NADIE EN EL BOSQUE">
+</div>
+<!-- Dorama #4 -->
+<div class="folder" onclick="openModal('modalD4')">
+<img src="https://image.tmdb.org/t/p/original/6SP6NiyFxzUaegvg4TB3TMZlv8H.jpg" alt="LA CHICA ENMASCARADA">
+</div>
+<!-- Dorama #5 -->
+<div class="folder" onclick="openModal('modalD5')">
+<img src="https://image.tmdb.org/t/p/original/szr7QFNnuspcyhW0rsoDMDN73pP.jpg" alt="JERARQUÍA">
+</div>
+<!-- Dorama #6 -->
+<div class="folder" onclick="openModal('modalD6')">
+<img src="https://image.tmdb.org/t/p/original/oIqmjlpt2dXEAExCOqTzsWjf0tJ.jpg" alt="PROHIBIDO ENAMORARSE">
+</div>
+<!-- Dorama #7 -->
+<div class="folder" onclick="openModal('modalD7')">
+<img src="https://image.tmdb.org/t/p/original/kxU1hhebWZGaz8gkMVi8zkZhzVt.jpg" alt="SABUESOS">
+</div>
+<!-- Dorama #8 -->
+<div class="folder" onclick="openModal('modalD8')">
+<img src="https://image.tmdb.org/t/p/original/eOCZIaGSUZzCAiz70G7kEQzuC0U.jpg" alt="¡DOONA!">
+</div>
+<!-- Dorama #9 -->
+<div class="folder" onclick="openModal('modalD9')">
+<img src="https://image.tmdb.org/t/p/original/hjp9921tF0S6duKUoScLOC5ABCc.jpg" alt="SOUNDTRACK #1">
+</div>
+<!-- Dorama #10 -->
+<div class="folder" onclick="openModal('modalD10')">
+<img src="https://image.tmdb.org/t/p/original/sXSF14MJyBL3nUshdiN9gnKqSFA.jpg" alt="THE 8 SHOW">
+</div>
+<!-- Dorama #11 -->
+<div class="folder" onclick="openModal('modalDorama11')">
+<img src="https://image.tmdb.org/t/p/original/jiGxkMP3lzPDaPw4F0EZAEiTSgL.jpg" alt="NO GAIN NO LOVE">
+</div>
+<!-- Dorama #12 -->
+<div class="folder" onclick="openModal('modalEntreVidaMuerte')">
+    <img src="https://image.tmdb.org/t/p/original/fftQPjDLNfioD3nVA8c8zDcR0M6.jpg" alt="ENTRE LA VIDA Y LA MUERTE">
+</div>
+</div>
+
+<!-- MODALES COMPLETOS -->
+
+
+<!-- DORAMA "EL JUEGO DE LA MUERTE" -->
+
+<!-- MODAL -->
+
+<div id="modalD1" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalD1')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/ecM5MY9g2mF6x5SrB2QWOYkcH98.jpg" alt="Poster de Belleza Verdadera">
+        <h3>EL JUEGO DE LA MUERTE</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2023</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Drama, Sci-Fi & Fantasy</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 8</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Finalizada</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> Choi Yee-Jae creció en un entorno familiar pobre, pero tenía una personalidad brillante y amable. Tras 7 años sin encontrar un trabajo decente, se siente desesperado. Decide acabar con su vida Choi Yee-Jae pensó que todo se acabaría tras quitarse la vida, pero, tras su muerte, se enfrenta a la Muerte, que está frente a la puerta del Infierno. Se le impone el castigo de experimentar la muerte 12 veces más a través de diferentes cuerpos.</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalD#EJDLMT1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalD#EJDLMT1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalD#EJDLMT1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lLzJ6ZXhlOXV4d3hrNA==" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL3BxdHR5NjgwaWVzeg==" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL2hocGdhOWIycmg5NQ==" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL3hrOGZwcDQ0d2RsYg==" class="button" target="_blank">Episodio 4</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL2hpdm0wcGt4MXZkMQ==" class="button" target="_blank">Episodio 5</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL2VrbHhrczF0Y2xwNA==" class="button" target="_blank">Episodio 6</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL2FhOGF5ZnM3a2NvaA==" class="button" target="_blank">Episodio 7</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9obHN3aXNoLmNvbS9lL3FvNzNxOWRvMW9vcw==" class="button" target="_blank">Episodio 8</a>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL -->
+
+<div id="modalD2" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalD2')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg" alt="Poster de El Juego Del Calamar">
+        <h3>EL JUEGO DEL CALAMAR</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2021</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Action & Adventure, Misterio, Drama</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 9</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Continúa</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> Cientos de jugadores cortos de dinero aceptan una extraña invitación a competir en juegos infantiles. Adentro les espera un premio irresistible... con un riesgo mortal.</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalD#EJDCT1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalD#EJDCT1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalD#EJDCT1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9uYnM5bWQxcm4wMW0=" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS80MnJwZnl5eW5mcHo=" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9hZWExejd1eDV4aHE=" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS93eG94ZWd2dHkwa3A=" class="button" target="_blank">Episodio 4</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS80ZWdxcXV3Y2drMzY=" class="button" target="_blank">Episodio 5</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS94Y2ZiMmMwbnRhc3g=" class="button" target="_blank">Episodio 6</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9rcnFxNjlqam90NXE=" class="button" target="_blank">Episodio 7</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS8xM2lscmNoZGo4ZW4=" class="button" target="_blank">Episodio 8</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS96a2ZyNW0wcWJxZDI=" class="button" target="_blank">Episodio 9</a>
+        </div>
+    </div>
+</div>
+
+<!-- DORAMA "NADIE EN EL BOSQUE" -->
+
+<!-- MODAL -->
+
+<div id="modalD3" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalD3')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/uMl2TzRs1LzTR9jyRNHnf5keqMV.jpg" alt="Poster de Nadie en el Bosque">
+        <h3>NADIE EN EL BOSQUE</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2024</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Misterio, Crimen, Drama</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 8</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Finalizada</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> Un tranquilo día de verano, una mujer misteriosa llega a la casa que alquiló para vacacionar... y desata una serie de eventos que alteran la vida del propietario y quienes lo rodean.</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalD#NEEBT1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalD#NEEBT1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalD#NEEBT1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS91bDAyZzlrYTFuNm8=" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS91dzVscDQ0dXE0Zm8=" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9nMmllMzRjbmo3Y2s=" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS84cjF5bmt2MnBreXY=" class="button" target="_blank">Episodio 4</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS83eHd5NzVsMGswcHA=" class="button" target="_blank">Episodio 5</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS91eHE0Z2xzamd4dng=" class="button" target="_blank">Episodio 6</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS92bDNvMWRyNDZlOXE=" class="button" target="_blank">Episodio 7</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9iZ2VnNDFxZXJpeWU=" class="button" target="_blank">Episodio 8</a>
+        </div>
+    </div>
+</div>
+
+<!-- DORAMA "LA CHICA ENMASCARADA" -->
+
+<!-- MODAL -->
+
+<div id="modalD4" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalD4')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/6SP6NiyFxzUaegvg4TB3TMZlv8H.jpg" alt="Poster de La Chica Enmascarada">
+        <h3>LA CHICA ENMASCARADA</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2023</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Drama, Comedia, Misterio, Crimen</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 7</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Finalizada</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> Una oficinista acomplejada por su aspecto se convierte en una popular streamer enmascarada por las noches... hasta que unos fatídicos eventos dan un vuelco a su vida.</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalD#LCET1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalD#LCET1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalD#LCET1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS85cHUwcnprNjJyZ2U=" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9qd2o0MWoxazAwOHc=" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS91dTB3dWM0ZmIxc28=" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9rNm5mdWJkZHNqaWo=" class="button" target="_blank">Episodio 4</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9iOHp3b3M0MmRkYjI=" class="button" target="_blank">Episodio 5</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9oMHdoM2luaHRuN3A=" class="button" target="_blank">Episodio 6</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS96bDI4MHQwMzNobm8=" class="button" target="_blank">Episodio 7</a>
+        </div>
+    </div>
+</div>
+
+<!-- DORAMA "JERARQUÍA" -->
+
+<!-- MODAL -->
+
+<div id="modalD5" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalD5')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/szr7QFNnuspcyhW0rsoDMDN73pP.jpg" alt="Poster de Jerarquía">
+        <h3>JERARQUÍA</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2024</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Drama</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 7</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Finalizada</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> El 0.01 % de los alumnos de la escuela Jooshin tiene el control de todo, pero un nuevo estudiante de intercambio bastante reservado logra abrir una grieta en ese mundo insondable.</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalD#JT1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalD#JT1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalD#JT1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9zeTFldzdxOTdiZ2s=" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9yZThpYm0wY294c3A=" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9xMnowM3FuMHZubmo=" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9pcGtyYWJqcTQ1dWI=" class="button" target="_blank">Episodio 4</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9wcmszbXZlZTdjZDg=" class="button" target="_blank">Episodio 5</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9odHVzNDdhd214emI=" class="button" target="_blank">Episodio 6</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9zd2lzaHNydi5jb20vZS9vZHNpa3psNGh1Y3g=" class="button" target="_blank">Episodio 7</a>
+        </div>
+    </div>
+</div>
+
+<!-- DORAMA "PROHIBIDO ENAMORARSE" -->
+
+<!-- MODAL -->
+
+<div id="modalD6" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalD6')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/oIqmjlpt2dXEAExCOqTzsWjf0tJ.jpg" alt="Poster de Prohibido Enamorarse">
+        <h3>PROHIBIDO ENAMORARSE</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2024</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Drama</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 8</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Finalizada</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> Cuando una escuela muy exclusiva aplica una regla que prohíbe los romances a riesgo de expulsión, una estudiante ayuda a los demás a cambio de dinero.</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalD#PET1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalD#PET1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalD#PET1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2ZlbTgyYXRxdnBsOQ==" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2gzbTc3YmZpY2p2eg==" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lLzVybzBkdzl6ZjBicg==" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL3Fydnk5NGFjMHlwaQ==" class="button" target="_blank">Episodio 4</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL3RpMzRjOWkyM2Rjaw==" class="button" target="_blank">Episodio 5</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL3hrbjdoNGw1OXpzNg==" class="button" target="_blank">Episodio 6</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL21xdmUxMDdjajRkZQ==" class="button" target="_blank">Episodio 7</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2g5cnF1Y294Z3c2cg==" class="button" target="_blank">Episodio 8</a>
+        </div>
+    </div>
+</div>
+
+<!-- DORAMA "SABUESOS" -->
+
+<!-- MODAL -->
+
+<div id="modalD7" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalD7')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/kxU1hhebWZGaz8gkMVi8zkZhzVt.jpg" alt="Poster de Sabuesos">
+        <h3>SABUESOS</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2023</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Drama, Action & Adventure, Crimen</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 8</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Finalizada</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> Dos jóvenes boxeadores unen fuerzas con un benévolo prestamista para destruir a un despiadado usurero que se aprovecha de los más vulnerables.</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalD#SBST1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalD#SBST1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalD#SBST1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2ZsM2dvbHk4cGIweQ==" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2QxY2hiNW10N3d0NQ==" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2ZuejBzcXl1cjloNQ==" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL3hlN3lib21nM2ZrYQ==" class="button" target="_blank">Episodio 4</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2s4N250NHdjcHN3cQ==" class="button" target="_blank">Episodio 5</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2M3NWZwYm94ZW92MA==" class="button" target="_blank">Episodio 6</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lLzdscHlmczdjYW4xMQ==" class="button" target="_blank">Episodio 7</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2RoZW5yN2JiaWg5dg==" class="button" target="_blank">Episodio 8</a>
+        </div>
+    </div>
+</div>
+
+<!-- DORAMA "¡DONNA!" -->
+
+<!-- MODAL -->
+
+<div id="modalD8" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalD8')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/eOCZIaGSUZzCAiz70G7kEQzuC0U.jpg" alt="Poster de ¡Doona!">
+        <h3>¡DOONA!</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2023</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Drama</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 9</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Finalizada</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> Un universitario hace frente a la vida y los estudios mientras lidia con una situación única: su compañera de casa es una antigua (y atractiva) estrella del K-pop.</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalD#DT1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalD#DT1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalD#DT1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lLzVjaGRscG9jazh5eg==" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lLzd6Z2w1bmp1b2YwOA==" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL3Y5aWxlZW45dTFrYw==" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2dramxuNm9uOG9pdA==" class="button" target="_blank">Episodio 4</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL3JsaHAzM3A1NjJobw==" class="button" target="_blank">Episodio 5</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2RiemY4cHY5MGlmeg==" class="button" target="_blank">Episodio 6</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2V2Y3FxcjRzM21vbA==" class="button" target="_blank">Episodio 7</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lLzZvanB2OGRscDB2eA==" class="button" target="_blank">Episodio 8</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL3NuazV3dWtmcWMxcg==" class="button" target="_blank">Episodio 9</a>
+        </div>
+    </div>
+</div>
+
+<!-- DORAMA "SOUNDTRACK #1" -->
+
+<!-- MODAL -->
+
+<div id="modalD9" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalD9')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/hjp9921tF0S6duKUoScLOC5ABCc.jpg" alt="Poster de Soundtrack #1">
+        <h3>SOUNTRACK #1</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2022</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Drama</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 4</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Finalizada</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> A Eunsoo le piden que escriba la letra para una canción de un compositor famoso. Se la rechazan, porque es una letra sin el sentimiento de haber amado sin ser correspondido. Un día, Eunsoo descubre que Sunwoo se enamoró de alguien y le pide que se vaya a vivir con ella para ayudarla con la letra. ¿De quién se había enamorado Sunwoo? ¿Cuándo empezó su historia?</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalD#S#1T1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalD#S#1T1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalD#S#1T1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2pjdnZlenZ2bWFlag==" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lLzRuNXlvazhrdzFkcA==" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2M3OWpkMnpseXV1Yg==" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL3hnc281czdjejBkaQ==" class="button" target="_blank">Episodio 4</a>
+        </div>
+    </div>
+</div>
+
+<!-- DORAMA "THE 8 SHOW" -->
+
+<!-- MODAL -->
+    
+<div id="modalD10" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalD10')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/sXSF14MJyBL3nUshdiN9gnKqSFA.jpg" alt="The 8 Show">
+        <h3>THE 8 SHOW</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2024</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Drama, Misterio</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 8</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Finalizada</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> Ocho personas atrapadas en un misterioso edificio de ocho pisos participan en un juego tentador pero peligroso en el que ganan dinero conforme pasa el tiempo.</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalD#T8ST1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalD#T8ST1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalD#T8ST1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL3Ywb2ltaHozc2w4bw==" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL3BxMG93YmRzdWNkZw==" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2R1NnU5YmZpOHNldw==" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2Q1cmp0ODU3cDBleA==" class="button" target="_blank">Episodio 4</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lLzF6cms3Zms2NTRpbw==" class="button" target="_blank">Episodio 5</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lLzB6d3B3NWk3MTdoMQ==" class="button" target="_blank">Episodio 6</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2IxMWRvbG1ucWFydA==" class="button" target="_blank">Episodio 7</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9pcGxheWVyaGxzLmNvbS9lL2RqandkbGQydWl5eg==" class="button" target="_blank">Episodio 8</a>
+        </div>
+    </div>
+</div>
+
+<!-- DORAMA "NO GAIN NO LOVE" -->
+
+<!-- MODAL -->
+
+<div id="modalDorama11" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalDorama11')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/jiGxkMP3lzPDaPw4F0EZAEiTSgL.jpg" alt="No Gain No Love">
+        <h3>EL QUE NO AMA NO GANA</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2024</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Comedia, Drama</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 12</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Finalizada</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> Son Hae Young es el tipo de persona que no quiere perder dinero bajo ninguna circunstancia. Cuando era niña, tuvo que compartir el amor de su madre con los demás, a menudo encontraba a sus socios en relaciones por debajo de su punto de equilibrio. Ahora, Son Hae Young enfrenta la posibilidad de perderse un ascenso laboral en su lugar de trabajo.</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalDorama#NGNLT1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalDorama#NGNLT1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalDorama#NGNLT1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2t1cnE2NDFleXEwMQ==" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lLzB0ajFkOWcwaW1udQ==" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2s5dm8xMGhybGZ5aA==" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2JoejNtY2Q5d25sdw==" class="button" target="_blank">Episodio 4</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL25ucGtpZ3cyZWhxcw==" class="button" target="_blank">Episodio 5</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2ZlYnY5cTRzdTd2aQ==" class="button" target="_blank">Episodio 6</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2htZ2huOW5tZTAyYw==" class="button" target="_blank">Episodio 7</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lLzdta29iY2ExNGFqZg==" class="button" target="_blank">Episodio 8</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL29pajJoZDBhZHd4dw==" class="button" target="_blank">Episodio 9</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lLzFhanpydXoxdDl5Mw==" class="button" target="_blank">Episodio 10</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL3ltYjNmeGk0ZWNxdw==" class="button" target="_blank">Episodio 11</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lLzQ2cHJ0NzZ5cG5zeA==" class="button" target="_blank">Episodio 12</a>
+        </div>
+    </div>
+</div>
+
+<!-- DORAMA "ENTRE LA VIDA Y LA MUERTE" -->
+
+<!-- MODAL -->
+
+<div id="modalEntreVidaMuerte" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modalEntreVidaMuerte')">×</span>
+        <img src="https://image.tmdb.org/t/p/original/fftQPjDLNfioD3nVA8c8zDcR0M6.jpg" alt="Entre la vida y la muerte">
+        <h3>ENTRE LA VIDA Y LA MUERTE</h3>
+        <div class="modal-info">
+            <p><i class="fas fa-calendar-alt icono"></i><strong>Año:</strong> 2024</p>
+            <p><i class="fas fa-film icono"></i><strong>Género:</strong> Misterio, Drama</p>
+            <p><i class="fas fa-tv icono"></i><strong>Temporadas:</strong> 1</p>
+            <p><i class="fas fa-list icono"></i><strong>Episodios:</strong> 8</p>
+            <p><i class="fas fa-signal icono"></i><strong>Estado:</strong> Finalizada</p>
+            <p><i class="fas fa-info-circle icono"></i><strong>Sinopsis:</strong> Narra la historia de un grupo de desconocidos a los que les cuesta asimilar una horrible experiencia de su pasado. Cada uno de ellos lleva una vida normal cuando se ven extrañamente arrastrados a una tienda de iluminación situada al final de un callejón de dudosa reputación. Un cauteloso tendero vigila la tienda, que puede contener la clave del pasado, presente y futuro de los desconocidos.</p>
+            <div class="video-buttons">
+                <span class="button" onclick="openInnerModal('innerModalEntreVidaMuerteS1')">TEMPORADA 1</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEMPORADA 1 -->
+
+<div id="innerModalEntreVidaMuerteS1" class="inner-modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInnerModal('innerModalEntreVidaMuerteS1')">×</span>
+        <div class="video-buttons">
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2diNzMyMmtrZG5odQ==" class="button" target="_blank">Episodio 1</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL20wOTd6bW1ydXF4aw==" class="button" target="_blank">Episodio 2</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2gzdnduc3pmYXNtYQ==" class="button" target="_blank">Episodio 3</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lLzkyN2o5eWloNTZuYg==" class="button" target="_blank">Episodio 4</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL3pzaTU5Z2d5YTd5OQ==" class="button" target="_blank">Episodio 5</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL25rbzdlZ2Q5Nndpag==" class="button" target="_blank">Episodio 6</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL3JmaHprM3NqejJoYw==" class="button" target="_blank">Episodio 7</a>
+            <a href="https://vpn-movie-ofc.blogspot.com/2024/05/embed_27.html?r=aHR0cHM6Ly9naGJyaXNrLmNvbS9lL2s5czMxbGI1Y2Nhdw==" class="button" target="_blank">Episodio 8</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+(function() {
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
+
+    function openInnerModal(innerModalId) {
+        document.getElementById(innerModalId).style.display = "block";
+    }
+
+    function closeInnerModal(innerModalId) {
+        document.getElementById(innerModalId).style.display = "none";
+    }
+
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+    window.openInnerModal = openInnerModal;
+    window.closeInnerModal = closeInnerModal;
+})();
+</script>
+
+</body>
+</html>
